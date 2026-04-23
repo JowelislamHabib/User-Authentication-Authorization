@@ -31,7 +31,9 @@ const Signin = () => {
     });
     if (error) {
       console.error(error);
-      toast.danger("Wow! You Just did it");
+      toast.danger("Login Failed! Please enter a valid credential", {
+        timeout: 1000,
+      });
       return;
     }
     toast.success("You Just SignedIn", {
@@ -40,6 +42,7 @@ const Signin = () => {
         className: "bg-success text-success-foreground",
       },
       description: "You can Sign Out on next page",
+      timeout: 2000,
     });
 
     setTimeout(() => {

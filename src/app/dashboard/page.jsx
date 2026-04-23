@@ -17,8 +17,7 @@ const DashboardPage = async () => {
 
   return (
     <div>
-      <h1>This is Dashboard</h1>
-      <SignOutBtn />
+      <SignOutBtn user={user} />
     </div>
   );
 };

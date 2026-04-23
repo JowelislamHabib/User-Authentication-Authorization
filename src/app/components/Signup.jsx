@@ -10,6 +10,7 @@ import {
   Form,
   FieldError,
   InputGroup,
+  toast,
 } from "@heroui/react";
 import { useRouter } from "next/navigation";
 
@@ -36,6 +37,14 @@ const Signup = () => {
       console.error(error);
       return;
     }
+    toast.success("You Just Created an Account for no reason", {
+      actionProps: {
+        children: "Nice!",
+        className: "bg-success text-success-foreground",
+      },
+      timeout: 2000,
+    });
+
     router.push("/dashboard");
 
     console.log("From Data", { data, error });

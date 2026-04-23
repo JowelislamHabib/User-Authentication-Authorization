@@ -1,8 +1,6 @@
-import Image from "next/image";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import { Tabs } from "@heroui/react";
-import Dashboard from "./components/Dashboard";
 
 export default function Home() {
   return (

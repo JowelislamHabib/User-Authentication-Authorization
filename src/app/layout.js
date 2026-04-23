@@ -26,9 +26,9 @@ export default function RootLayout({ children }) {
     >
       <body
         suppressHydrationWarning
-        className="min-h-full flex flex-col bg-gradient-to-tr from-blue-100 via-white to-purple-100"
+        className="min-h-full flex flex-col bg-linear-to-tr from-blue-100 via-white to-purple-100"
       >
-        <Toast.Provider />
+        <Toast.Provider placement={"top"} />
         <main>{children}</main>
       </body>
     </html>
