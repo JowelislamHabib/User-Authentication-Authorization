@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { ArrowChevronRight, Eye, EyeSlash } from "@gravity-ui/icons";
 import {
   Button,
@@ -8,18 +9,45 @@ import {
   Label,
   Form,
   FieldError,
-  Description,
   InputGroup,
 } from "@heroui/react";
+import { useRouter } from "next/navigation";
+
 import React, { useState } from "react";
 
 const Signup = () => {
   const [isVisible, setIsVisible] = useState(false);
 
+  const router = useRouter();
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const userData = Object.fromEntries(formData.entries());
+    console.log(userData);
+
+    const { data, error } = await authClient.signUp.email({
+      name: `${userData.firstName} ${userData.lastName}`,
+      email: userData.email,
+      password: userData.password,
+      callbackURL: "/dashboard",
+    });
+    if (error) {
+      console.error(error);
+      return;
+    }
+    router.push("/dashboard");
+
+    console.log("From Data", { data, error });
+  };
+
   return (
     <>
       <div>
-        <Form className="flex  flex-col gap-4 shadow-2xl bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-10">
+        <Form
+          onSubmit={onSubmit}
+          className="flex  flex-col gap-4 shadow-2xl bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-10"
+        >
           <div className="grid grid-cols-2 gap-4">
             <TextField
               isRequired
