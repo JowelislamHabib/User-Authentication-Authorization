@@ -1,5 +1,5 @@
 "use client";
-
+import { authClient, signIn } from "@/lib/auth-client";
 import { ArrowRight, Eye, EyeSlash } from "@gravity-ui/icons";
 import {
   Button,
@@ -9,16 +9,54 @@ import {
   Form,
   FieldError,
   InputGroup,
+  toast,
 } from "@heroui/react";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const Signin = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const router = useRouter();
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const userData = Object.fromEntries(formData.entries());
+    console.log(userData);
+
+    const { data, error } = await authClient.signIn.email({
+      email: userData.email,
+      password: userData.password,
+      // callbackURL: "/dashboard",
+    });
+    if (error) {
+      console.error(error);
+      toast.danger("Wow! You Just did it");
+      return;
+    }
+    toast.success("You Just SignedIn", {
+      actionProps: {
+        children: "Good Job",
+        className: "bg-success text-success-foreground",
+      },
+      description: "You can Sign Out on next page",
+    });
+
+    setTimeout(() => {
+      console.log("object");
+      router.push("/dashboard");
+    }, 2000);
+
+    console.log("From Data", { data, error });
+  };
 
   return (
     <>
       <div>
-        <Form className="flex  flex-col gap-4 shadow-2xl bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-10">
+        <Form
+          onSubmit={onSubmit}
+          className="flex  flex-col gap-4 shadow-2xl bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-10"
+        >
           <TextField
             isRequired
             name="email"
