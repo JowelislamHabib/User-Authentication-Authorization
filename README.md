@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# User Authentication & Authorization
+
+Authentication and authorization starter project built with **Next.js 16**, **React 19**, **better-auth**, and **MongoDB**.
+
+## Stack
+
+- Next.js `16.2.4`
+- React `19.2.4`
+- better-auth `1.6.7`
+- MongoDB + `@better-auth/mongo-adapter`
+- HeroUI
+
+## Project Structure
+
+```text
+src/
+├── app/
+│   ├── api/
+│   │   └── auth/
+│   │       └── [...all]/
+│   │           └── route.js
+│   ├── components/
+│   │   ├── SignOutBtn.jsx
+│   │   ├── Signin.jsx
+│   │   └── Signup.jsx
+│   ├── dashboard/
+│   │   └── page.jsx
+│   ├── globals.css
+│   ├── layout.js
+│   └── page.js
+└── lib/
+    ├── auth-client.js
+    └── auth.js
+```
 
 ## Getting Started
 
-First, run the development server:
+### 1) Install dependencies
+
+```bash
+npm install
+```
+
+### 2) Configure environment variables
+
+Create `.env.local` in the project root and add required auth/database values.
+
+Use `src/lib/auth.js` as the source of truth for exact variable names.
+
+Typical values are similar to:
+
+```env
+MONGODB_URI=your-mongodb-connection-string
+BETTER_AUTH_SECRET=your-strong-secret
+BETTER_AUTH_URL=http://localhost:3000
+```
+
+### 3) Run development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` – start dev server
+- `npm run build` – production build
+- `npm run start` – run production server
+- `npm run lint` – run ESLint
 
-## Learn More
+## Auth Routes
 
-To learn more about Next.js, take a look at the following resources:
+Auth handler is located at:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/app/api/auth/[...all]/route.js`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+App pages include:
 
-## Deploy on Vercel
+- `/` (home)
+- `/dashboard` (protected area, based on your auth logic)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Keep secrets in `.env` (never commit env files).
+- Confirm MongoDB and auth config before running in production.
+
+## License
+
+MIT (or update to your preferred license).
