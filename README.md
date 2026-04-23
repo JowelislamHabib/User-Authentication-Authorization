@@ -43,7 +43,7 @@ npm install
 
 ### 2) Configure environment variables
 
-Create `.env.local` in the project root and add required auth/database values.
+Create `.env` in the project root and add required auth/database values.
 
 Use `src/lib/auth.js` as the source of truth for exact variable names.
 
