@@ -34,7 +34,7 @@ const Signup = () => {
       callbackURL: "/dashboard",
     });
     if (error) {
-      console.error(error);
+      console.log(error);
       return;
     }
     toast.success("You Just Created an Account for no reason", {
@@ -106,6 +106,7 @@ const Signup = () => {
           </TextField>
           <TextField className="w-full" name="password">
             <Label>Password</Label>
+
             <InputGroup>
               <InputGroup.Input
                 className="w-full "
@@ -128,6 +129,7 @@ const Signup = () => {
                 </Button>
               </InputGroup.Suffix>
             </InputGroup>
+            <FieldError />
           </TextField>
           <div className="flex gap-2">
             <Button type="submit">
