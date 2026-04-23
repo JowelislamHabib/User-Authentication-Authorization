@@ -20,36 +20,38 @@ const Signup = () => {
     <>
       <div>
         <Form className="flex  flex-col gap-4 shadow-2xl bg-white/70 backdrop-blur-xl border border-white rounded-2xl p-10">
-          <TextField
-            isRequired
-            name="firstName"
-            type="text"
-            validate={(value) => {
-              if (value.length < 2) {
-                return "First Name must be at least 2 characters";
-              }
-              return null;
-            }}
-          >
-            <Label>First Name</Label>
-            <Input placeholder="Mr." />
-            <FieldError />
-          </TextField>
-          <TextField
-            isRequired
-            name="lastName"
-            type="text"
-            validate={(value) => {
-              if (value.length < 3) {
-                return "Last Name must be at least 3 characters";
-              }
-              return null;
-            }}
-          >
-            <Label>Last Name</Label>
-            <Input placeholder="John" />
-            <FieldError />
-          </TextField>
+          <div className="grid grid-cols-2 gap-4">
+            <TextField
+              isRequired
+              name="firstName"
+              type="text"
+              validate={(value) => {
+                if (value.length < 2) {
+                  return "First Name must be at least 2 characters";
+                }
+                return null;
+              }}
+            >
+              <Label>First Name</Label>
+              <Input placeholder="Mr." />
+              <FieldError />
+            </TextField>
+            <TextField
+              isRequired
+              name="lastName"
+              type="text"
+              validate={(value) => {
+                if (value.length < 3) {
+                  return "Last Name must be at least 3 characters";
+                }
+                return null;
+              }}
+            >
+              <Label>Last Name</Label>
+              <Input placeholder="John" />
+              <FieldError />
+            </TextField>
+          </div>
           <TextField
             isRequired
             name="email"
